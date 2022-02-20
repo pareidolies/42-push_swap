@@ -65,3 +65,42 @@ void	do_downward_move(int nbr, t_info *info)
 	}
 	do_pb(info);
 }
+
+void	do_upward_move_biggest(int nbr, t_info *info)
+{
+	while (info->first_b->data != nbr)
+	{
+		do_rb(info);
+	}
+	do_pa(info);
+}
+
+void	do_upward_move_smallest(int nbr, t_info *info)
+{
+	while (info->first_b->data != nbr)
+	{
+		do_rb(info);
+	}
+	do_pa(info);
+	printf("pa OK\n");
+	do_ra(info);
+	printf("ra OK\n");
+}
+
+void	do_downward_move_biggest(int nbr, t_info *info)
+{
+	while (info->first_b->data != nbr)
+	{
+		do_rrb(info);
+	}
+	do_pa(info);
+}
+
+void	do_downward_move_smallest(int nbr, t_info *info)
+{
+	while (info->first_b->data != nbr)
+	{
+		do_rrb(info);
+	}
+	do_pa(info);
+}

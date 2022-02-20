@@ -50,7 +50,7 @@ int	check_limits(char *str)
 	return (1);
 }
 
-void	lstsize_pushswap(t_info *info)
+int	lstsize_pushswap(t_info *info)
 {
 	t_stack	*tmp;
 	int	len;
@@ -63,7 +63,7 @@ void	lstsize_pushswap(t_info *info)
 		len++;
 		tmp = tmp->next;
 	}
-	info->size = len;
+	 return (len);
 }
 
 void	create_table(t_info *info)
@@ -72,7 +72,7 @@ void	create_table(t_info *info)
 	t_stack *tmp;
 
 	i = 0;
-	lstsize_pushswap(info);
+	info->size = lstsize_pushswap(info);
 	info->tab = malloc(info->size * sizeof(int));
 	tmp = info->first_a;
 	while (i < info->size)

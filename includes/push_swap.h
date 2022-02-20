@@ -16,9 +16,7 @@ typedef struct s_stack
 typedef struct s_info
 {
 	t_stack *first_a;
-	t_stack *last_a;
 	t_stack *first_b;
-	t_stack *last_b;
 	int	size;
 	int	*tab;
 	int	quarters[4];
@@ -54,7 +52,7 @@ void    del_element_top_b(t_info *info);
 //check_errors.c
 int     check_duplicates(int *tab);
 void     create_table(t_info *info);
-void  lstsize_pushswap(t_info *info);
+int  lstsize_pushswap(t_info *info);
 int     check_limits(char *str);
 int     check_integers(char *str);
 int     is_space(char c);
@@ -103,9 +101,14 @@ int     find_smallest(t_info *info);
 int     find_biggest(t_info *info);
 void    do_upward_move(int nbr, t_info *info);
 void    do_downward_move(int nbr, t_info *info);
+void    do_upward_move_biggest(int nbr, t_info *info);
+void    do_upward_move_smallest(int nbr, t_info *info);
+void    do_downward_move_biggest(int nbr, t_info *info);
+void    do_downward_move_biggest(int nbr, t_info *info);
 
 //sort_big.c
 int     batch_in_progress(int batch_id, t_info *info);
 void    create_batch(int batch_id, t_info *info);
+void    sort_batch(t_info *info);
 
 #endif

@@ -12,15 +12,13 @@ void	add_element_bottom_a(int nbr, t_info *info)
 		new->next = new;
 		new->prev = new;
 		info->first_a = new;
-		info->last_a = new;
 	}
 	else
 	{
 		new->next = info->first_a;
-		new->prev = info->last_a;
-		info->last_a->next = new;
+		new->prev = info->first_a->prev;
 		info->first_a->prev = new;
-		info->last_a = new;
+		new->prev->next = new;
 	}
 }
 
@@ -35,14 +33,13 @@ void	add_element_top_a(int nbr, t_info *info)
 		new->next = new;
 		new->prev = new;
 		info->first_a = new;
-		info->last_a = new;
 	}
 	else
 	{
-		new->prev = info->last_a;
 		new->next = info->first_a;
+		new->prev = info->first_a->prev;
 		info->first_a->prev = new;
-		info->last_a->next = new;
+		new->prev->next = new;
 		info->first_a = new;
 	}
 }
@@ -58,15 +55,13 @@ void    add_element_bottom_b(int nbr, t_info *info)
 		new->next = new;
 		new->prev = new;
 		info->first_b = new;
-		info->last_b = new;
 	}
 	else
 	{
 		new->next = info->first_b;
-		new->prev = info->last_b;
-		info->last_b->next = new;
+		new->prev = info->first_b->prev;
 		info->first_b->prev = new;
-		info->last_b = new;
+		new->prev->next = new;
 	}
 }
 
@@ -81,14 +76,13 @@ void    add_element_top_b(int nbr, t_info *info)
 		new->next = new;
 		new->prev = new;
 		info->first_b = new;
-		info->last_b = new;
 	}
 	else
 	{
-		new->prev = info->last_b;
 		new->next = info->first_b;
+		new->prev = info->first_b->prev;
 		info->first_b->prev = new;
-		info->last_b->next = new;
+		new->prev->next = new;
 		info->first_b = new;
 	}
 }
@@ -97,9 +91,9 @@ void	del_element_top_a(t_info *info)
 {
 	t_stack	*tmp;
 
-	if (info->first_a->next == info->first_a->next)
+	if (info->first_a->next == info->first_a)
 	{
-		free(info->first_a->next);
+		free(info->first_a);
 		info->first_a = NULL;
 	}
 	else
@@ -115,8 +109,9 @@ void	del_element_top_a(t_info *info)
 void	del_element_top_b(t_info *info)
 {
 	t_stack *tmp;
-	if (info->first_b->next == info->first_b->next)
+	if (info->first_b->next == info->first_b)
 	{
+		printf("coucou");
 		free(info->first_b);
 		info->first_b = NULL;
 	}
@@ -133,9 +128,7 @@ void	del_element_top_b(t_info *info)
 void	initialize_info(t_info *info)
 {
 	info->first_a = NULL;
-	info->last_a = NULL;
 	info->first_b = NULL;
-	info->last_b = NULL;
 }
 
 void	display_stack(t_info *info)
@@ -145,19 +138,22 @@ void	display_stack(t_info *info)
 
 	tmp_a = info->first_a;
 	tmp_b = info->first_b;
-	printf("%15d  |  %-15d\n", tmp_a->data, tmp_b->data);
-	while (tmp_a->next != info->first_a && tmp_b->next != info->first_b)
+	if (tmp_a && tmp_b)
 	{
-		tmp_a = tmp_a->next;
-		tmp_b = tmp_b->next;
 		printf("%15d  |  %-15d\n", tmp_a->data, tmp_b->data);
+		while (tmp_a->next != info->first_a && tmp_b->next != info->first_b && tmp_a && tmp_b)
+		{
+			tmp_a = tmp_a->next;
+			tmp_b = tmp_b->next;
+			printf("%15d  |  %-15d\n", tmp_a->data, tmp_b->data);
+		}
 	}
-	while (tmp_a->next != info->first_a)
+	while (tmp_a && tmp_a->next != info->first_a)
 	{
 		tmp_a = tmp_a->next;
 		printf("%15d  |  %-15s\n", tmp_a->data, "");
 	}
-	while (tmp_b->next != info->first_b)
+	while (tmp_b && tmp_b->next != info->first_b)
 	{
 		tmp_b = tmp_b->next;
 		printf("%15s  |  %-15d\n", "", tmp_b->data);
@@ -201,17 +197,20 @@ int main(int argc, char **argv)
 	printf("quarter 0 : %d\n", info.quarters[0]);
 	printf("quarter 1 : %d\n", info.quarters[1]);
 	//do_sa(&info);
-	add_element_top_b(7, &info);
-	add_element_top_b(8, &info);
-	do_sb(&info);
-	printf("FIRST B : %d\n", info.first_b->data);
-	do_pa(&info);
-	do_downward_move(3, &info);
-	do_upward_move(7, &info);
-	do_upward_move(1, &info);
+	//add_element_top_b(7, &info);
+	//add_element_top_b(8, &info);
+	//do_sb(&info);
+	//printf("FIRST B : %d\n", info.first_b->data);
+	//do_pa(&info);
+	//do_downward_move(3, &info);
+	//do_upward_move(7, &info);
+	//do_upward_move(1, &info);
 	create_batch(0, &info);
+	sort_batch(&info);	
+	create_batch(1, &info);	
+	sort_batch(&info);	
 	display_stack(&info);
-	printf("biggest : %d\n", find_biggest(&info));
-	printf("smallest : %d\n", find_smallest(&info));
+	//printf("biggest : %d\n", find_biggest(&info));
+	//printf("smallest : %d\n", find_smallest(&info));
 	return (0);
 }
