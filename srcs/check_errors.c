@@ -14,9 +14,9 @@ int	check_integers(char *str)
 	int	i;
 
 	i = 0;
-	while (is_space(str[i]) && str[i])
+	while (str[i] && is_space(str[i]))
 		i++;
-	if ((str[i] == '+' || str[i] == '-') && str[i])
+	if (str[i] && (str[i] == '+' || str[i] == '-'))
 		i++;
 	while (str[i])
 	{
@@ -33,54 +33,21 @@ int	check_limits(char *str)
 	int	i;
 
 	i = 0;
-	while (is_space(str[i]))
+	while (str[i] && is_space(str[i]))
 		i++;
-	if (str[i] == '-')
+	if (str[i] && str[i] == '-')
 	{
 		if (ft_atoi(str) > 0)
 			return (0);
 		i++;
 	}
-	if (str[i] != '-')
+	if (str[i] && str[i] != '-')
 	{
 		if (ft_atoi(str) < 0)
 			return (0);
 		i++;
 	}
 	return (1);
-}
-
-int	lstsize_pushswap(t_info *info)
-{
-	t_stack	*tmp;
-	int	len;
-
-	len = 1;
-	tmp = info->first_a;
-	tmp = tmp->next;
-	while (tmp != info->first_a)
-	{
-		len++;
-		tmp = tmp->next;
-	}
-	 return (len);
-}
-
-void	create_table(t_info *info)
-{
-	int	i;
-	t_stack *tmp;
-
-	i = 0;
-	info->size = lstsize_pushswap(info);
-	info->tab = malloc(info->size * sizeof(int));
-	tmp = info->first_a;
-	while (i < info->size)
-	{
-		info->tab[i] = tmp->data;
-		tmp = tmp->next;
-		i++;
-	}
 }
 
 int	check_duplicates(int *tab)
