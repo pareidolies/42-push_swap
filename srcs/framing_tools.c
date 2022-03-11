@@ -7,16 +7,21 @@ int	lstsize_pushswap(t_info *info, char stack_name)
 	t_stack	*first;
 	int	len;
 
-	len = 0;
+	len = 1;
 	if (stack_name == 'a')
 	{
 		tmp = info->first_a;
 		first = info->first_a;
 	}
-	else
+	else if (stack_name == 'b')
 	{
 		tmp = info->first_b;
 		first = info->first_b;
+	}
+	else
+	{
+		tmp = info->first_o;
+		first = info->first_o;
 	}
 	tmp = tmp->next;
 	while (tmp != first)
@@ -27,24 +32,25 @@ int	lstsize_pushswap(t_info *info, char stack_name)
 	return (len);
 }
 
-void	create_table(t_info *info)
+int	*create_table(t_info *info, int size)
 {
 	int	i;
+	int	*tab;
 	t_stack *tmp;
 
 	i = 0;
-	info->size = lstsize_pushswap(info, 'a');
-	info->tab = malloc(info->size * sizeof(int));
+	tab = malloc(size * sizeof(int));
 	tmp = info->first_a;
-	while (i < info->size)
+	while (i < size)
 	{
-		info->tab[i] = tmp->data;
+		tab[i] = tmp->data;
 		tmp = tmp->next;
 		i++;
 	}
+	return (tab);
 }
 
-int	*sort_table(int *tab)
+int	*sort_table(int *tab, t_info *info)
 {
 	int	i;
 	int	j;
@@ -52,10 +58,10 @@ int	*sort_table(int *tab)
 
 	i = 0;
 	j = 0;
-	while (tab[i])
+	while (i < info->size)
 	{
 		j = i + 1;
-		while (tab[j])
+		while (j < info->size)
 		{
 			if (tab[i] > tab[j])
 			{

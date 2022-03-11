@@ -5,20 +5,26 @@ void	initialize_info(t_info *info)
 {
 	info->first_a = NULL;
 	info->first_b = NULL;
+	info->first_o = NULL;
 	info->biggest = 0;
 	info->smallest = 0;
+	info->count = 0;
 }
 
 void	display_stack(t_info *info)
 {
 	t_stack	*tmp_a;
 	t_stack	*tmp_b;
+	int	i;
 
 	tmp_a = info->first_a;
 	tmp_b = info->first_b;
+	
+	i = 0;
 	if (tmp_a && tmp_b)
 	{
 		printf("%15d  |  %-15d\n", tmp_a->data, tmp_b->data);
+		i = 1;
 		while (tmp_a->next != info->first_a && tmp_b->next != info->first_b && tmp_a && tmp_b)
 		{
 			tmp_a = tmp_a->next;
@@ -26,61 +32,89 @@ void	display_stack(t_info *info)
 			printf("%15d  |  %-15d\n", tmp_a->data, tmp_b->data);
 		}
 	}
-	while (tmp_a && tmp_a->next != info->first_a)
+	if (tmp_a)
 	{
-		tmp_a = tmp_a->next;
-		printf("%15d  |  %-15s\n", tmp_a->data, "");
+		if (i == 0)
+			printf("%15d  |  %-15s\n", tmp_a->data, "");	
+		while (tmp_a && tmp_a->next != info->first_a)
+		{
+			tmp_a = tmp_a->next;	
+			printf("%15d  |  %-15s\n", tmp_a->data, "");	
+		}
 	}
-	while (tmp_b && tmp_b->next != info->first_b)
-	{
-		tmp_b = tmp_b->next;
-		printf("%15s  |  %-15d\n", "", tmp_b->data);
+	if (tmp_b)
+	{	
+		if (i == 0)
+			printf("%15s  |  %-15d\n", "", tmp_b->data);
+		while (tmp_b && tmp_b->next != info->first_b)
+		{	
+			tmp_b = tmp_b->next;
+			printf("%15s  |  %-15d\n", "", tmp_b->data);
+		}
 	}
 	printf("%15s  |  %-15s\n", "Stack A", "Stack B");
+}
+
+void	fill_stack_a(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->size)
+	{
+		add_element_bottom(info->tab[i], info, 'a');
+		i++;
+	}
 }
 
 int main(int argc, char **argv)
 {
 	int	i;
-	int	index;
 	t_info info;
 
 	initialize_info(&info);
-	add_element_top(ft_atoi(argv[1]), &info, 'a');
-	i = 2;
+	i = 1;
+	info.tab = malloc(sizeof(int) * (argc - 1));
+	info.sort_tab = malloc(sizeof(int) * (argc - 1));
+	if (argc == 1)
+		return (0);
 	while (i < argc)
 	{
-		if (!check_integers(argv[i]) || !check_integers(argv[1]))
+		if (!check_integers(argv[i]))
 		{
-			printf("Error 1\n");
+			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
-		if (!check_limits(argv[i]) || !check_limits(argv[1]))
+		if (!check_limits(argv[i]))
 		{
-			printf("Error 2\n");
+			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
-		add_element_bottom(ft_atoi(argv[i]), &info, 'a');
+		info.tab[i - 1] = ft_atoi(argv[i]);
+		info.sort_tab[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
-	display_stack(&info);
-	printf("SIZE : %d\n", info.size);
-	create_table(&info);
-	if (!check_duplicates(info.tab))
+	info.size = argc - 1;
+	info.sort_tab = sort_table(info.sort_tab, &info);
+	i = 0;
+	if (!check_duplicates(&info))
 	{
-		printf("Error 3\n");
+		ft_putstr_fd("Error\n", 2);
 		return (0);
 	}
-	info.tab = sort_table(info.tab);
-	find_quarters(&info);
-	find_deciles(&info);
-	index = find_index(4, &info, 'a');
-	printf("quarter 0 : %d\n", info.quarters[0]);
-	printf("quarter 1 : %d\n", info.quarters[1]);
-	printf("index de 4 : %d\n", index);
-	sort_big(&info);	
-	display_stack(&info);
-	//printf("biggest : %d\n", find_biggest(&info));
-	//printf("smallest : %d\n", find_smallest(&info));
-	return (0);
+	if (info.size <= 1)
+		return (0);
+	if (info.size == 2)
+		sort_size_two(&info);
+	else if (info.size == 3)
+		sort_size_three(&info, info.sort_tab, 0);
+	else if (info.size == 4 || info.size == 5)
+		sort_size_four_or_five(&info);
+	else
+		sort_big(&info);
+	free_stack(&info, 'a');
+	free_stack(&info, 'o');
+	free(info.tab);
+	free(info.sort_tab);
+	return(0);
 }

@@ -14,9 +14,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	minus;
-	int	nb;
+	int		i;
+	int		minus;
+	long long int	nb;
 
 	i = 0;
 	minus = 0;
@@ -37,7 +37,7 @@ int	ft_atoi(const char *str)
 	}
 	if ((minus % 2) == 1)
 		nb = nb * (-1);
-	return (nb);
+	return ((int)nb);
 }
 
 /*#include <stdio.h>

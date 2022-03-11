@@ -1,78 +1,121 @@
 #include "../includes/push_swap.h"
 #include "../libft/libft.h"
 
-int	batch_in_progress(int batch_id, t_info *info)
+void	finish_sorting_a(t_info *info)
+{
+	int smallest;
+	int size;
+	int index;
+
+	smallest = find_smallest(info, 'a');
+	index = find_index(smallest, info, 'a');
+	size = lstsize_pushswap(info, 'a');
+	while (info->first_a->data != smallest)
+	{
+		if (index < size / 2)
+			do_ra(info);
+		else
+			do_rra(info);
+	}
+}
+
+void	print_one_instruction(int nbr)
+{
+	if (nbr == 0)
+		ft_putstr_fd("sa\n", 1);
+	if (nbr == 1)
+		ft_putstr_fd("sb\n", 1);
+	if (nbr == 2)
+		ft_putstr_fd("ss\n", 1);
+	if (nbr == 3)
+		ft_putstr_fd("pa\n", 1);
+	if (nbr == 4)
+		ft_putstr_fd("pb\n", 1);
+	if (nbr == 5)
+		ft_putstr_fd("ra\n", 1);
+	if (nbr == 6)
+		ft_putstr_fd("rb\n", 1);
+	if (nbr == 7)
+		ft_putstr_fd("rr\n", 1);
+	if (nbr == 8)
+		ft_putstr_fd("rra\n", 1);
+	if (nbr == 9)
+		ft_putstr_fd("rrb\n", 1);
+	if (nbr == 10)
+		ft_putstr_fd("rrr\n", 1);
+}
+
+void	print_instructions(t_info *info)
 {
 	t_stack *tmp;
 
-	tmp = info->first_a;
-	while (tmp->next->data != info->first_a->data)
+	tmp = info->first_o;
+	if (tmp)
 	{
-		if (tmp->data >= info->quarters[batch_id]
-			&& tmp->data <= info->quarters[batch_id + 1])
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	is_in_batch_range(int nbr, int batch_id, t_info *info)
-{
-	if (nbr >=info->quarters[batch_id] && nbr <= info->quarters[batch_id + 1])
-		return (1);
-	return (0);
-}
-
-void	create_batch(int batch_id, t_info *info)
-{
-	t_stack	*tmp;
-
-	tmp = info->first_a;
-	while (batch_in_progress(batch_id, info))
-	{
-		while (tmp->next->data != info->first_a->data)
+		while (tmp->next != info->first_o)
 		{
-			if (is_in_batch_range(tmp->data, batch_id, info))
-				take_shortest_path(tmp->data, info, 'a');
+			print_one_instruction(tmp->data);
 			tmp = tmp->next;
 		}
+		print_one_instruction(tmp->data);
 	}
 }
 
-void	sort_batch(t_info *info)
+void	free_stack(t_info *info, char c)
 {
-	int	nbr_to_sort;
 	int	i;
-	int	value;
+	int	size;
+	t_stack	*current;
+	t_stack	*delete;
 
 	i = 0;
-	value = lstsize_pushswap(info, 'b') / 2;
-	while (info->first_b != NULL)
+	if (c == 'a')
+		current = info->first_a;
+	else if (c == 'b')
+		current = info->first_b;
+	else
+		current = info->first_o;
+	if (current)
 	{
-		nbr_to_sort = most_reachable_number(info);
-		take_shortest_path(nbr_to_sort, info, 'b');
-		info->smallest = 0;
-		info->biggest = 0;
-		i++;
+	size = lstsize_pushswap(info, c);
+		while (i < size - 1)
+		{
+			delete = current;
+			current = current->next;
+			free(delete);
+			i++;
+		}
+		free(current);
 	}
-}
-
-void	finish_sorting_batch(int batch_id, t_info *info)
-{
-	while (is_in_batch_range(info->first_a->data, batch_id, info))
-		do_ra(info);
 }
 
 void	sort_big(t_info *info)
 {
-	int	batch_id;
-
-	batch_id = 0;
-	while (batch_id < 4)
+	info->jump = 2;
+	while (info->jump < 20)
 	{
-		create_batch(batch_id, info);
-		sort_batch(info);
-		finish_sorting_batch(batch_id, info);
-		batch_id++;
+		initialize_info(info);
+		fill_stack_a(info);
+		if (is_sort(info))
+			break;
+		find_head(info);
+		add_information_to_elements(info);
+		push_elements_to_b(info);
+		sort_elements_in_b(info);
+		finish_sorting_a(info);
+			if (info->size > 100)
+			{
+				if (info->count < 5500)
+					break;
+			}
+			else
+			{
+				if (info->count < 700)
+					break;
+			}
+		info->jump = info->jump + 2;
+		free_stack(info, 'a');
+		free_stack(info, 'o');
 	}
+	print_instructions(info);
 }

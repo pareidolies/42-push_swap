@@ -3,11 +3,11 @@
 
 int	find_index(int nbr, t_info *info, char stack_name)
 {
-	int	i;
+	int	len;
 	t_stack	*tmp;
 	t_stack	*first;
 
-	i = 0;
+	len = 1;
 	if (stack_name == 'a')
 	{
 		tmp = info->first_a;
@@ -21,9 +21,9 @@ int	find_index(int nbr, t_info *info, char stack_name)
 	while (tmp->next->data != first->data && tmp->data != nbr)
 	{
 		tmp = tmp->next;
-		i++;
+		len++;
 	}
-	return (i);
+	return (len);
 }
 
 int	find_smallest(t_info *info, char stack_name)
@@ -79,4 +79,19 @@ int	find_biggest(t_info *info, char stack_name)
 			biggest = tmp->data;
 	}
 	return (biggest);
+}
+
+int	is_sort(t_info *info)
+{
+	t_stack	*tmp;
+
+	tmp = info->first_a;
+	while (tmp->next != info->first_a)
+	{
+		if (tmp->data > tmp->next->data)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+
 }
