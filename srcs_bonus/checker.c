@@ -15,30 +15,27 @@
 
 void	do_instruction(char *str, t_info *info)
 {
-	size_t	len;
-
-	len = ft_strlen(str);
-	if (ft_strncmp(str, "sa\n", len) == 0)
+	if (ft_strncmp(str, "sa\n", ft_strlen(str)) == 0)
 		do_sa(info);
-	else if (ft_strncmp(str, "sb\n", len) == 0)
+	else if (ft_strncmp(str, "sb\n", ft_strlen(str)) == 0)
 		do_sb(info);
-	else if (ft_strncmp(str, "ss\n", len) == 0)
+	else if (ft_strncmp(str, "ss\n", ft_strlen(str)) == 0)
 		do_ss(info);
-	else if (ft_strncmp(str, "pa\n", len) == 0)
+	else if (ft_strncmp(str, "pa\n", ft_strlen(str)) == 0)
 		do_pa(info);
-	else if (ft_strncmp(str, "pb\n", len) == 0)
+	else if (ft_strncmp(str, "pb\n", ft_strlen(str)) == 0)
 		do_pb(info);
-	else if (ft_strncmp(str, "ra\n", len) == 0)
+	else if (ft_strncmp(str, "ra\n", ft_strlen(str)) == 0)
 		do_ra(info);
-	else if (ft_strncmp(str, "rb\n", len) == 0)
+	else if (ft_strncmp(str, "rb\n", ft_strlen(str)) == 0)
 		do_rb(info);
-	else if (ft_strncmp(str, "rr\n", len) == 0)
+	else if (ft_strncmp(str, "rr\n", ft_strlen(str)) == 0)
 		do_rr(info);
-	else if (ft_strncmp(str, "rra\n", len) == 0)
+	else if (ft_strncmp(str, "rra\n", ft_strlen(str)) == 0)
 		do_rra(info);
-	else if (ft_strncmp(str, "rrb\n", len) == 0)
+	else if (ft_strncmp(str, "rrb\n", ft_strlen(str)) == 0)
 		do_rrb(info);
-	else if (ft_strncmp(str, "rrr\n", len) == 0)
+	else if (ft_strncmp(str, "rrr\n", ft_strlen(str)) == 0)
 		do_rrr(info);
 	else
 		ft_putstr_fd("Error\n", 2);

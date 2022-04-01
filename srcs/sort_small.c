@@ -24,34 +24,36 @@ void	sort_size_two(t_info *info)
 
 void	sort_size_three(t_info *info, int *tab, int x)
 {
-	t_stack	*first;
-
 	if (x == 0)
 	{
 		initialize_info(info);
 		fill_stack_a(info);
 		if (is_sort(info))
-		{
 			return ;
-		}
 	}
-	first = info->first_a;
 	info->smallest = tab[0];
 	info->middle = tab[1];
 	info->biggest = tab[2];
 	while (!is_sort(info))
 	{
-		if (first->data == info->middle
-			&& first->next->data == info->biggest)
+		if (info->first_a->data == info->middle
+			&& info->first_a->next->data == info->biggest)
 			do_rra(info);
-		else if (first->data == info->biggest
-			&& first->next->data == info->smallest)
+		else if (info->first_a->data == info->biggest
+			&& info->first_a->next->data == info->smallest)
 			do_ra(info);
 		else
 			do_sa(info);
 	}
 	if (x == 0)
 		print_instructions(info);
+}
+
+int	comparison(int small_value, t_info *info)
+{
+	if (find_index(small_value, info, 'a') < lstsize_pushswap(info, 'a') / 2)
+		return (1);
+	return (0);
 }
 
 void	sort_size_four_or_five(t_info *info)
@@ -65,7 +67,7 @@ void	sort_size_four_or_five(t_info *info)
 	while (lstsize_pushswap(info, 'a') > 3)
 	{
 		small_value = find_smallest(info, 'a');
-		if (find_index(small_value, info, 'a') < lstsize_pushswap(info, 'a') / 2)
+		if (comparison(small_value, info))
 			while (info->first_a->data != small_value)
 				do_ra(info);
 		else

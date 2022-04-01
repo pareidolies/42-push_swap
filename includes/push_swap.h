@@ -63,6 +63,7 @@ void	initialize_info(t_info *info);
 
 //framing_tools.c
 int		lstsize_pushswap(t_info *info, char stack_name);
+int		lstsize_pushswap_2(t_stack *tmp, t_stack *first);
 int		*create_table(t_info *info, int size);
 int		*sort_table(int *tab, t_info *info);
 

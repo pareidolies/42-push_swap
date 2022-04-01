@@ -25,6 +25,7 @@ BONUS			= checker.c \
 			  do_rotate.c \
 			  do_swap.c \
 			  operations_tools.c \
+			  lstsize_pushswap.c \
 
 SRCS_DIR		= srcs/
 

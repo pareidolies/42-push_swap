@@ -101,6 +101,15 @@ void	free_stack(t_info *info, char c)
 	}
 }
 
+void	sort_big_investigation(t_info *info)
+{
+	find_head(info);
+	add_information_to_elements(info);
+	push_elements_to_b(info);
+	sort_elements_in_b(info);
+	finish_sorting_a(info);
+}
+
 void	sort_big(t_info *info)
 {
 	info->jump = 2;
@@ -110,11 +119,7 @@ void	sort_big(t_info *info)
 		fill_stack_a(info);
 		if (is_sort(info))
 			break ;
-		find_head(info);
-		add_information_to_elements(info);
-		push_elements_to_b(info);
-		sort_elements_in_b(info);
-		finish_sorting_a(info);
+		sort_big_investigation(info);
 		if (info->size > 100)
 		{
 			if (info->count < 5500)

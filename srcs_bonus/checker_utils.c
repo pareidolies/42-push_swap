@@ -94,34 +94,3 @@ void	free_stack(t_info *info, char c)
 		free(current);
 	}
 }
-
-int	lstsize_pushswap(t_info *info, char stack_name)
-{
-	t_stack	*tmp;
-	t_stack	*first;
-	int		len;
-
-	len = 1;
-	if (stack_name == 'a')
-	{
-		tmp = info->first_a;
-		first = info->first_a;
-	}
-	else if (stack_name == 'b')
-	{
-		tmp = info->first_b;
-		first = info->first_b;
-	}
-	else
-	{
-		tmp = info->first_o;
-		first = info->first_o;
-	}
-	tmp = tmp->next;
-	while (tmp != first)
-	{
-		len++;
-		tmp = tmp->next;
-	}
-	return (len);
-}

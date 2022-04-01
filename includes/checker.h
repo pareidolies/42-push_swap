@@ -33,4 +33,8 @@ char	*get_next_line(int fd);
 char	*ft_returnline(char **str);
 void	ft_read(int fd, char *buf, char **str);
 
+//lstsize_pushswap.c
+int     lstsize_pushswap(t_info *info, char stack_name);
+int     lstsize_pushswap_2(t_stack *tmp, t_stack *first);
+
 #endif

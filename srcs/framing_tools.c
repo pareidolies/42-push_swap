@@ -17,9 +17,7 @@ int	lstsize_pushswap(t_info *info, char stack_name)
 {
 	t_stack	*tmp;
 	t_stack	*first;
-	int		len;
 
-	len = 1;
 	if (stack_name == 'a')
 	{
 		tmp = info->first_a;
@@ -36,6 +34,14 @@ int	lstsize_pushswap(t_info *info, char stack_name)
 		first = info->first_o;
 	}
 	tmp = tmp->next;
+	return (lstsize_pushswap_2(tmp, first));
+}
+
+int	lstsize_pushswap_2(t_stack *tmp, t_stack *first)
+{
+	int	len;
+
+	len = 1;
 	while (tmp != first)
 	{
 		len++;

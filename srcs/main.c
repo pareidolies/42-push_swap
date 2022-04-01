@@ -23,7 +23,7 @@ void	initialize_info(t_info *info)
 	info->count = 0;
 }
 
-void	display_stack(t_info *info)
+/*void	display_stack(t_info *info)
 {
 	t_stack	*tmp_a;
 	t_stack	*tmp_b;
@@ -65,7 +65,7 @@ void	display_stack(t_info *info)
 		}
 	}
 	printf("%15s  |  %-15s\n", "Stack A", "Stack B");
-}
+}*/
 
 void	fill_stack_a(t_info *info)
 {
@@ -79,34 +79,62 @@ void	fill_stack_a(t_info *info)
 	}
 }
 
+int	number_of_args(char **list)
+{
+	int	i;
+
+	i = 0;
+	while (list[i])
+		i++;
+	return (i);
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
+	int		j;
+	char	**arguments;	
 	t_info	info;
+	int	tab_size;
 
-	initialize_info(&info);
-	i = 1;
-	info.tab = malloc(sizeof(int) * (argc - 1));
-	info.sort_tab = malloc(sizeof(int) * (argc - 1));
 	if (argc == 1)
 		return (0);
-	while (i < argc)
+	if (argc == 2)
+		arguments = ft_split(argv[1], ' ');
+	else
+		arguments = argv;
+	initialize_info(&info);
+	if (argc == 2)
 	{
-		if (!check_integers(argv[i]))
+		i = 0;
+		tab_size = number_of_args(arguments);
+	}
+	else
+	{
+		i = 1;
+		tab_size = argc - 1;
+	}
+	info.tab = malloc(sizeof(int) * tab_size);
+	info.sort_tab = malloc(sizeof(int) * tab_size);
+	j = 0;
+	while (j < tab_size)
+	{
+		if (!check_integers(arguments[i]))
 		{
 			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
-		if (!check_limits(argv[i]))
+		if (!check_limits(arguments[i]))
 		{
 			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
-		info.tab[i - 1] = ft_atoi(argv[i]);
-		info.sort_tab[i - 1] = ft_atoi(argv[i]);
+		info.tab[j] = ft_atoi(arguments[i]);
+		info.sort_tab[j] = ft_atoi(arguments[i]);
+		j++;
 		i++;
 	}
-	info.size = argc - 1;
+	info.size = tab_size;
 	info.sort_tab = sort_table(info.sort_tab, &info);
 	i = 0;
 	if (!check_duplicates(&info))
