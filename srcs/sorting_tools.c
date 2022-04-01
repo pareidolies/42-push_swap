@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:27:29 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:27:32 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:49:27 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	find_index(int nbr, t_info *info, char stack_name)
 {
-	int	len;
+	int		len;
 	t_stack	*tmp;
 	t_stack	*first;
 
@@ -40,7 +40,7 @@ int	find_index(int nbr, t_info *info, char stack_name)
 
 int	find_smallest(t_info *info, char stack_name)
 {
-	int	smallest;
+	int		smallest;
 	t_stack	*tmp;
 	t_stack	*first;
 
@@ -67,8 +67,8 @@ int	find_smallest(t_info *info, char stack_name)
 
 int	find_biggest(t_info *info, char stack_name)
 {
-	int     biggest;
-	t_stack *tmp;
+	int		biggest;
+	t_stack	*tmp;
 	t_stack	*first;
 
 	if (stack_name == 'a')
@@ -79,7 +79,6 @@ int	find_biggest(t_info *info, char stack_name)
 	}
 	else
 	{
-
 		biggest = info->first_b->data;
 		tmp = info->first_b;
 		first = info->first_b;
@@ -105,5 +104,4 @@ int	is_sort(t_info *info)
 		tmp = tmp->next;
 	}
 	return (1);
-
 }

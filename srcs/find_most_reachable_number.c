@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:26:33 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:26:34 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:17:51 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 void	find_path_in_a_length(int nbr, t_info *info)
 {
 	t_stack	*tmp;
-	int	i;
-	int	size;
+	int		i;
+	int		size;
 
 	size = lstsize_pushswap(info, 'a');
 	i = 0;
@@ -26,9 +26,9 @@ void	find_path_in_a_length(int nbr, t_info *info)
 	{
 		i++;
 		if (is_extreme(nbr, info) && tmp->data > tmp->next->data)
-			break;
+			break ;
 		if (nbr > tmp->data && nbr < tmp->next->data)
-			break;
+			break ;
 		tmp = tmp->next;
 	}
 	info->ra = i;
@@ -51,7 +51,6 @@ int	analyze_path(t_info *info)
 	int	smallest;
 
 	smallest = info->ra + info->rrb;
-	//info->tmp_move = 1;
 	if (smallest > (info->rb + info->rra))
 	{
 		smallest = info->rb + info->rra;
@@ -78,10 +77,10 @@ int	analyze_path(t_info *info)
 
 int	most_reachable_number(t_info *info)
 {
-	int	path_length;
+	int		path_length;
 	t_stack	*tmp;
-	int	distance;
-	int	nbr;
+	int		distance;
+	int		nbr;
 
 	path_length = 10000;
 	tmp = info->first_b;

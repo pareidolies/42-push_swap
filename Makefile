@@ -14,6 +14,7 @@ SRCS			=  main.c \
 			   sort_big.c \
 			   sort_small.c \
 			   find_loop.c \
+			   push_elements_to_b.c \
 
 BONUS			= checker.c \
 			  get_next_line.c \

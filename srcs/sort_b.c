@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:27:04 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:27:05 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:21:44 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	do_standard_operations(t_info *info)
 
 void	sort_elements_in_b(t_info *info)
 {
-	int nbr;
+	int	nbr;
 
 	while (info->first_b != NULL)
 	{
 		nbr = most_reachable_number(info);
 		initialize_operations(info);
-		adjust_reception_stack(nbr, info);
+		adjust_reception_stack_1(nbr, info);
 		take_shortest_path(nbr, info, 'b');
 		do_joint_operations(info);
 		do_standard_operations(info);

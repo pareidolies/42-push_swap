@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:29:41 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:29:43 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:10:58 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 # endif
 
 //checker.c
-int	main(int argc, char **argv);
-void    do_instruction(char *str, t_info *info);
-char    *get_instruction(char **line);
+int		main(int argc, char **argv);
+void	do_instruction(char *str, t_info *info);
+char	*get_instruction(char **line);
 
 //get_next_line.c
-char		*get_next_line(int fd);
-char     *ft_returnline(char **str);
-void     ft_read(int fd, char *buf, char **str);
+char	*get_next_line(int fd);
+char	*ft_returnline(char **str);
+void	ft_read(int fd, char *buf, char **str);
 
 #endif

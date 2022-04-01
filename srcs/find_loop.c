@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:26:23 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:26:25 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:26:45 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	add_index_to_stack(t_info *info)
 {
-	int	i;
+	int		i;
 	t_stack	*tmp;
 
 	i = 0;
@@ -33,8 +33,8 @@ void	add_index_to_stack(t_info *info)
 
 void	is_in_place(t_info *info)
 {
-	t_stack *tmp;
-	t_stack *prev_in_place;
+	t_stack	*tmp;
+	t_stack	*prev_in_place;
 
 	info->head->in_place = 1;
 	prev_in_place = info->head;
@@ -54,8 +54,8 @@ void	is_in_place(t_info *info)
 int	count_of_in_place(t_stack *head, int i)
 {
 	t_stack	*tmp;
-	t_stack *prev_in_place;
-	int	count;
+	t_stack	*prev_in_place;
+	int		count;
 
 	count = 0;
 	prev_in_place = head;
@@ -75,9 +75,9 @@ int	count_of_in_place(t_stack *head, int i)
 
 void	find_head(t_info *info)
 {
-	t_stack *tmp;
-	int greatest_count;
-	
+	t_stack	*tmp;
+	int		greatest_count;
+
 	add_index_to_stack(info);
 	greatest_count = count_of_in_place(info->first_a, info->jump);
 	info->head = info->first_a;
@@ -95,7 +95,7 @@ void	find_head(t_info *info)
 
 void	add_information_to_elements(t_info *info)
 {
-	int	i;
+	int		i;
 	t_stack	*tmp;
 
 	i = 0;
@@ -107,27 +107,4 @@ void	add_information_to_elements(t_info *info)
 		i++;
 	}
 	is_in_place(info);
-}
-
-void	push_elements_to_b(t_info *info)
-{
-	t_stack *tmp;
-	int	i;
-
-	i = 0;
-	tmp = info->first_a;
-	while (i < info->size)
-	{
-		if (tmp->in_place == 1)
-		{
-			do_ra(info);
-			i++;
-		}
-		else
-		{
-			do_pb(info);
-			i++;
-		}
-		tmp = info->first_a;
-	}
 }

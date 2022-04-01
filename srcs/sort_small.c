@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:27:23 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:27:25 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:48:15 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	sort_size_two(t_info *info)
 
 void	sort_size_three(t_info *info, int *tab, int x)
 {
-	t_stack *first;
+	t_stack	*first;
 
 	if (x == 0)
 	{
@@ -32,7 +32,7 @@ void	sort_size_three(t_info *info, int *tab, int x)
 		fill_stack_a(info);
 		if (is_sort(info))
 		{
-			return;
+			return ;
 		}
 	}
 	first = info->first_a;
@@ -41,9 +41,11 @@ void	sort_size_three(t_info *info, int *tab, int x)
 	info->biggest = tab[2];
 	while (!is_sort(info))
 	{
-		if (first->data == info->middle && first->next->data == info->biggest)
+		if (first->data == info->middle
+			&& first->next->data == info->biggest)
 			do_rra(info);
-		else if (first->data == info->biggest && first->next->data == info->smallest)
+		else if (first->data == info->biggest
+			&& first->next->data == info->smallest)
 			do_ra(info);
 		else
 			do_sa(info);
@@ -52,14 +54,14 @@ void	sort_size_three(t_info *info, int *tab, int x)
 		print_instructions(info);
 }
 
-void sort_size_four_or_five(t_info *info)
+void	sort_size_four_or_five(t_info *info)
 {
 	int	small_value;
 
 	initialize_info(info);
 	fill_stack_a(info);
 	if (is_sort(info))
-		return;
+		return ;
 	while (lstsize_pushswap(info, 'a') > 3)
 	{
 		small_value = find_smallest(info, 'a');
@@ -76,7 +78,7 @@ void sort_size_four_or_five(t_info *info)
 	info->small_tab = sort_table(info->small_tab, info);
 	sort_size_three(info, info->small_tab, 1);
 	while (info->first_b != NULL)
-		do_pa(info);	
+		do_pa(info);
 	print_instructions(info);
 	free(info->small_tab);
 }

@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:26:47 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:26:49 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:11:46 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ void	display_stack(t_info *info)
 {
 	t_stack	*tmp_a;
 	t_stack	*tmp_b;
-	int	i;
+	int		i;
 
 	tmp_a = info->first_a;
 	tmp_b = info->first_b;
-	
 	i = 0;
 	if (tmp_a && tmp_b)
 	{
 		printf("%15d  |  %-15d\n", tmp_a->data, tmp_b->data);
 		i = 1;
-		while (tmp_a->next != info->first_a && tmp_b->next != info->first_b && tmp_a && tmp_b)
+		while (tmp_a->next != info->first_a
+			&& tmp_b->next != info->first_b && tmp_a && tmp_b)
 		{
 			tmp_a = tmp_a->next;
 			tmp_b = tmp_b->next;
@@ -47,11 +47,11 @@ void	display_stack(t_info *info)
 	if (tmp_a)
 	{
 		if (i == 0)
-			printf("%15d  |  %-15s\n", tmp_a->data, "");	
+			printf("%15d  |  %-15s\n", tmp_a->data, "");
 		while (tmp_a && tmp_a->next != info->first_a)
 		{
-			tmp_a = tmp_a->next;	
-			printf("%15d  |  %-15s\n", tmp_a->data, "");	
+			tmp_a = tmp_a->next;
+			printf("%15d  |  %-15s\n", tmp_a->data, "");
 		}
 	}
 	if (tmp_b)
@@ -79,10 +79,10 @@ void	fill_stack_a(t_info *info)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int	i;
-	t_info info;
+	int		i;
+	t_info	info;
 
 	initialize_info(&info);
 	i = 1;
@@ -128,5 +128,5 @@ int main(int argc, char **argv)
 	free_stack(&info, 'o');
 	free(info.tab);
 	free(info.sort_tab);
-	return(0);
+	return (0);
 }

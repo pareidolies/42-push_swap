@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:28:31 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:28:33 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:55:05 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ int	is_sort(t_info *info)
 		tmp = tmp->next;
 	}
 	return (1);
-
 }
 
 int	*create_table(t_info *info, int size)
 {
-	int	i;
-	int	*tab;
-	t_stack *tmp;
+	int		i;
+	int		*tab;
+	t_stack	*tmp;
 
 	i = 0;
 	tab = malloc(size * sizeof(int));
@@ -70,8 +69,8 @@ int	*create_table(t_info *info, int size)
 
 void	free_stack(t_info *info, char c)
 {
-	int	i;
-	int	size;
+	int		i;
+	int		size;
 	t_stack	*current;
 	t_stack	*delete;
 
@@ -100,7 +99,7 @@ int	lstsize_pushswap(t_info *info, char stack_name)
 {
 	t_stack	*tmp;
 	t_stack	*first;
-	int	len;
+	int		len;
 
 	len = 1;
 	if (stack_name == 'a')

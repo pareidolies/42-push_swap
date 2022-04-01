@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_push.c                                          :+:      :+:    :+:   */
+/*   push_elements_to_b.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/01 12:28:41 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 14:56:58 by smostefa         ###   ########.fr       */
+/*   Created: 2022/04/01 15:24:45 by smostefa          #+#    #+#             */
+/*   Updated: 2022/04/01 15:25:08 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/checker.h"
+#include "../includes/push_swap.h"
 #include "../libft/libft.h"
 
-void	do_pa(t_info *info)
+void	push_elements_to_b(t_info *info)
 {
-	if (!info->first_b)
-		return ;
-	add_element_top(info->first_b->data, info, 'a');
-	del_element_top(info, 'b');
-	info->count++;
-}
+	t_stack	*tmp;
+	int		i;
 
-void	do_pb(t_info *info)
-{
-	if (!info->first_a)
-		return ;
-	add_element_top(info->first_a->data, info, 'b');
-	del_element_top(info, 'a');
-	info->count++;
+	i = 0;
+	tmp = info->first_a;
+	while (i < info->size)
+	{
+		if (tmp->in_place == 1)
+		{
+			do_ra(info);
+			i++;
+		}
+		else
+		{
+			do_pb(info);
+			i++;
+		}
+		tmp = info->first_a;
+	}
 }

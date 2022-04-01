@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:26:40 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:26:42 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:28:40 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	lstsize_pushswap(t_info *info, char stack_name)
 {
 	t_stack	*tmp;
 	t_stack	*first;
-	int	len;
+	int		len;
 
 	len = 1;
 	if (stack_name == 'a')
@@ -46,9 +46,9 @@ int	lstsize_pushswap(t_info *info, char stack_name)
 
 int	*create_table(t_info *info, int size)
 {
-	int	i;
-	int	*tab;
-	t_stack *tmp;
+	int		i;
+	int		*tab;
+	t_stack	*tmp;
 
 	i = 0;
 	tab = malloc(size * sizeof(int));

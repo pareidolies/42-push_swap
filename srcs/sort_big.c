@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:27:14 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:27:16 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:25:34 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	finish_sorting_a(t_info *info)
 {
-	int smallest;
-	int size;
-	int index;
+	int	smallest;
+	int	size;
+	int	index;
 
 	smallest = find_smallest(info, 'a');
 	index = find_index(smallest, info, 'a');
@@ -59,7 +59,7 @@ void	print_one_instruction(int nbr)
 
 void	print_instructions(t_info *info)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	tmp = info->first_o;
 	if (tmp)
@@ -75,8 +75,8 @@ void	print_instructions(t_info *info)
 
 void	free_stack(t_info *info, char c)
 {
-	int	i;
-	int	size;
+	int		i;
+	int		size;
 	t_stack	*current;
 	t_stack	*delete;
 
@@ -109,22 +109,22 @@ void	sort_big(t_info *info)
 		initialize_info(info);
 		fill_stack_a(info);
 		if (is_sort(info))
-			break;
+			break ;
 		find_head(info);
 		add_information_to_elements(info);
 		push_elements_to_b(info);
 		sort_elements_in_b(info);
 		finish_sorting_a(info);
-			if (info->size > 100)
-			{
-				if (info->count < 5500)
-					break;
-			}
-			else
-			{
-				if (info->count < 700)
-					break;
-			}
+		if (info->size > 100)
+		{
+			if (info->count < 5500)
+				break ;
+		}
+		else
+		{
+			if (info->count < 700)
+				break ;
+		}
 		info->jump = info->jump + 2;
 		free_stack(info, 'a');
 		free_stack(info, 'o');

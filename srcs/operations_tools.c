@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:26:54 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:26:55 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:40:09 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	add_element_bottom(int nbr, t_info *info, char stack_name)
 
 void	add_element_top(int nbr, t_info *info, char stack_name)
 {
-	t_stack *new;
+	t_stack	*new;
 	t_stack	**first;
 
 	new = malloc(sizeof(t_stack));

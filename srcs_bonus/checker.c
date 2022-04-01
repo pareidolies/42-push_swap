@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:28:16 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:28:17 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:53:35 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,13 @@ char	*get_instruction(char **line)
 
 int	main(int argc, char **argv)
 {
-	int	i;
+	int		i;
 	t_info	info;
 	char	*line;
 
 	initialize_info(&info);
 	i = 1;
 	info.tab = malloc(sizeof(int) * (argc - 1));
-	//info.sort_tab = malloc(sizeof(int) * (argc - 1));
 	if (argc <= 1)
 		return (0);
 	while (i < argc)
@@ -75,11 +74,9 @@ int	main(int argc, char **argv)
 			return (0);
 		}
 		info.tab[i - 1] = ft_atoi(argv[i]);
-		//info.sort_tab[i - 1] = ft_atoi(argv[i]);
 		i++;
 	}
 	info.size = argc - 1;
-	//info.sort_tab = sort_table(info.sort_tab, &info);
 	i = 0;
 	if (!check_duplicates(&info))
 	{
@@ -96,7 +93,6 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("KO\n", 1);
 	free_stack(&info, 'a');
 	free_stack(&info, 'b');
-	//free_stack(&info, 'o');
 	free(info.tab);
-	return(0);
+	return (0);
 }

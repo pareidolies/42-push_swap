@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:28:01 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 12:28:03 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:52:01 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_integers(char *str)
 	if (str[i] && (str[i] == '+' || str[i] == '-'))
 		i++;
 	if (!str[i])
-		return(0);
+		return (0);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
@@ -40,7 +40,6 @@ int	check_integers(char *str)
 	}
 	return (1);
 }
-
 
 int	check_limits(char *str)
 {
