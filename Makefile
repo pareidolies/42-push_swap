@@ -31,7 +31,7 @@ BONUS_DIR		= srcs_bonus/
 
 SRCS_PATH	 	= $(SRCS:%=$(SRCS_DIR)%)
 
-SRCS_B_PATH 		= $(BONUS:%=$(BONUS_DIR)%)
+SRCS_B_PATH 	= $(BONUS:%=$(BONUS_DIR)%)
 
 OBJS		 	= $(SRCS_PATH:%.c=%.o)
 
@@ -47,9 +47,9 @@ LIBRARY			= ./libft/libft.a
 
 INCS			= includes
 
-RM		 	= rm -f
+RM		 		= rm -f
 
-CC			= cc -Wall -Wextra -Werror -fsanitize=address
+CC				= cc -Wall -Wextra -Werror -fsanitize=address
 
 all:			${NAME}
 
