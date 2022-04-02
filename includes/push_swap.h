@@ -34,6 +34,9 @@ typedef struct s_info
 	t_stack	*head;
 	t_stack	*head_final;
 	t_stack	*first_o;
+	int	i;
+	int	j;
+	int	tab_size;
 	int		loop[100];
 	int		best_index;
 	int		ra;

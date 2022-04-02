@@ -47,38 +47,81 @@ char	*get_instruction(char **line)
 	return (*line);
 }
 
-int	main(int argc, char **argv)
+int	number_of_args(char **list)
 {
-	int		i;
-	t_info	info;
-	char	*line;
+	int	i;
 
-	initialize_info(&info);
-	i = 1;
-	info.tab = malloc(sizeof(int) * (argc - 1));
-	if (argc <= 1)
-		return (0);
-	while (i < argc)
-	{
-		if (!check_integers(argv[i]))
-		{
-			ft_putstr_fd("Error\n", 2);
-			return (0);
-		}
-		if (!check_limits(argv[i]))
-		{
-			ft_putstr_fd("Error\n", 2);
-			return (0);
-		}
-		info.tab[i - 1] = ft_atoi(argv[i]);
-		i++;
-	}
-	info.size = argc - 1;
 	i = 0;
-	if (!check_duplicates(&info))
+	while (list[i])
+		i++;
+	return (i);
+}
+
+int	fill_tab(char **arguments, t_info *info)
+{
+	info->j = 0;
+	while (info->j < info->tab_size)
+	{
+		if (!check_integers(arguments[info->i]))
+		{
+			ft_putstr_fd("Error\n", 2);
+			return (0);
+		}
+		if (!check_limits(arguments[info->i]))
+		{
+			ft_putstr_fd("Error\n", 2);
+			return (0);
+		}
+		info->tab[info->j] = ft_atoi(arguments[info->i]);
+		info->i++;
+		info->j++;
+	}
+	info->size = info->tab_size;
+	info->i = 0;
+	if (!check_duplicates(info))
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (0);
+	}
+	return (1);
+}
+
+char	**handle_arguments(int argc, char **argv, t_info *info)
+{
+	char	**arguments;
+
+	if (argc == 2)
+		arguments = ft_split(argv[1], ' ');
+	else
+		arguments = argv;
+	initialize_info(info);
+	if (argc == 2)
+	{
+		info->i = 0;
+		info->tab_size = number_of_args(arguments);
+	}
+	else
+	{
+		info->i = 1;
+		info->tab_size = argc - 1;
+	}
+	info->tab = malloc(sizeof(int) * info->tab_size);
+	return (arguments);
+}
+
+int	main(int argc, char **argv)
+{
+	t_info	info;
+	char	*line;
+	char	**arguments;
+
+	if (argc == 1)
+		return (0);
+	if (argc >= 2)
+	{
+		arguments = handle_arguments(argc, argv, &info);
+		if (!fill_tab(arguments, &info))
+			return (0);
 	}
 	initialize_info(&info);
 	fill_stack_a(&info);

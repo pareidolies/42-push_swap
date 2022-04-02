@@ -51,7 +51,7 @@ void	sort_size_three(t_info *info, int *tab, int x)
 
 int	comparison(int small_value, t_info *info)
 {
-	if (find_index(small_value, info, 'a') < lstsize_pushswap(info, 'a') / 2)
+	if (find_index(small_value, info, 'a') <= lstsize_pushswap(info, 'a') / 2)
 		return (1);
 	return (0);
 }

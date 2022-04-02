@@ -89,59 +89,81 @@ int	number_of_args(char **list)
 	return (i);
 }
 
-int	main(int argc, char **argv)
+int	fill_tab(char **arguments, t_info *info)
 {
-	int		i;
-	int		j;
-	char	**arguments;	
-	t_info	info;
-	int	tab_size;
-
-	if (argc == 1)
-		return (0);
-	if (argc == 2)
-		arguments = ft_split(argv[1], ' ');
-	else
-		arguments = argv;
-	initialize_info(&info);
-	if (argc == 2)
+	info->j = 0;
+	while (info->j < info->tab_size)
 	{
-		i = 0;
-		tab_size = number_of_args(arguments);
-	}
-	else
-	{
-		i = 1;
-		tab_size = argc - 1;
-	}
-	info.tab = malloc(sizeof(int) * tab_size);
-	info.sort_tab = malloc(sizeof(int) * tab_size);
-	j = 0;
-	while (j < tab_size)
-	{
-		if (!check_integers(arguments[i]))
+		if (!check_integers(arguments[info->i]))
 		{
 			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
-		if (!check_limits(arguments[i]))
+		if (!check_limits(arguments[info->i]))
 		{
 			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
-		info.tab[j] = ft_atoi(arguments[i]);
-		info.sort_tab[j] = ft_atoi(arguments[i]);
-		j++;
-		i++;
+		info->tab[info->j] = ft_atoi(arguments[info->i]);
+		info->sort_tab[info->j] = ft_atoi(arguments[info->i]);
+		info->j++;
+		info->i++;
 	}
-	info.size = tab_size;
-	info.sort_tab = sort_table(info.sort_tab, &info);
-	i = 0;
-	if (!check_duplicates(&info))
+	info->size = info->tab_size;
+	info->sort_tab = sort_table(info->sort_tab, info);
+	if (!check_duplicates(info))
 	{
 		ft_putstr_fd("Error\n", 2);
 		return (0);
 	}
+	return (1);
+}
+
+char	**handle_arguments(int argc, char **argv, t_info *info)
+{
+	char	**arguments;
+
+	if (argc == 2)
+		arguments = ft_split(argv[1], ' ');
+	else
+		arguments = argv;
+	initialize_info(info);
+	if (argc == 2)
+	{
+		info->i = 0;
+		info->tab_size = number_of_args(arguments);
+	}
+	else
+	{
+		info->i = 1;
+		info->tab_size = argc - 1;
+	}
+	info->tab = malloc(sizeof(int) * info->tab_size);
+	info->sort_tab = malloc(sizeof(int) * info->tab_size);
+	return (arguments);
+}
+
+void	free_all(t_info *info)
+{
+	free_stack(info, 'a');
+	free_stack(info, 'o');
+	free(info->tab);
+	free(info->sort_tab);
+}
+
+int	main(int argc, char **argv)
+{
+	char	**arguments;	
+	t_info	info;
+
+	if (argc == 1)
+		return (0);
+	else
+	{
+		arguments = handle_arguments(argc, argv, &info);
+		if (!fill_tab(arguments, &info))
+			return (0);
+	}	
 	if (info.size <= 1)
 		return (0);
 	if (info.size == 2)
@@ -152,9 +174,6 @@ int	main(int argc, char **argv)
 		sort_size_four_or_five(&info);
 	else
 		sort_big(&info);
-	free_stack(&info, 'a');
-	free_stack(&info, 'o');
-	free(info.tab);
-	free(info.sort_tab);
+	free_all(&info);
 	return (0);
 }
