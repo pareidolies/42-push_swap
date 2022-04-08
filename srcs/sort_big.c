@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:27:14 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 15:25:34 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/08 13:56:58 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,34 +70,6 @@ void	print_instructions(t_info *info)
 			tmp = tmp->next;
 		}
 		print_one_instruction(tmp->data);
-	}
-}
-
-void	free_stack(t_info *info, char c)
-{
-	int		i;
-	int		size;
-	t_stack	*current;
-	t_stack	*delete;
-
-	i = 0;
-	if (c == 'a')
-		current = info->first_a;
-	else if (c == 'b')
-		current = info->first_b;
-	else
-		current = info->first_o;
-	if (current)
-	{
-	size = lstsize_pushswap(info, c);
-		while (i < size - 1)
-		{
-			delete = current;
-			current = current->next;
-			free(delete);
-			i++;
-		}
-		free(current);
 	}
 }
 

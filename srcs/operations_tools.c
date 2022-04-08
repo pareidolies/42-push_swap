@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:26:54 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 14:40:09 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/08 14:11:09 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	add_element_top(int nbr, t_info *info, char stack_name)
 	t_stack	**first;
 
 	new = malloc(sizeof(t_stack));
+	if (!new)
+		return ;
 	new->data = nbr;
 	if (stack_name == 'a')
 		first = &info->first_a;

@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:26:47 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 15:11:46 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/08 13:36:02 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,6 @@ void	initialize_info(t_info *info)
 	printf("%15s  |  %-15s\n", "Stack A", "Stack B");
 }*/
 
-void	fill_stack_a(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	while (i < info->size)
-	{
-		add_element_bottom(info->tab[i], info, 'a');
-		i++;
-	}
-}
-
 int	number_of_args(char **list)
 {
 	int	i;
@@ -92,7 +80,7 @@ int	number_of_args(char **list)
 int	fill_tab(char **arguments, t_info *info)
 {
 	info->j = 0;
-	while (info->j < info->tab_size)
+	while (info->j < info->size)
 	{
 		if (!check_integers(arguments[info->i]))
 		{
@@ -109,7 +97,6 @@ int	fill_tab(char **arguments, t_info *info)
 		info->j++;
 		info->i++;
 	}
-	info->size = info->tab_size;
 	info->sort_tab = sort_table(info->sort_tab, info);
 	if (!check_duplicates(info))
 	{
@@ -131,24 +118,18 @@ char	**handle_arguments(int argc, char **argv, t_info *info)
 	if (argc == 2)
 	{
 		info->i = 0;
-		info->tab_size = number_of_args(arguments);
+		info->size = number_of_args(arguments);
 	}
 	else
 	{
 		info->i = 1;
-		info->tab_size = argc - 1;
+		info->size = argc - 1;
 	}
-	info->tab = malloc(sizeof(int) * info->tab_size);
-	info->sort_tab = malloc(sizeof(int) * info->tab_size);
+	info->tab = malloc(sizeof(int) * info->size);
+	info->sort_tab = malloc(sizeof(int) * info->size);
+	if (!info->tab || !info->sort_tab)
+		return (NULL);
 	return (arguments);
-}
-
-void	free_all(t_info *info)
-{
-	free_stack(info, 'a');
-	free_stack(info, 'o');
-	free(info->tab);
-	free(info->sort_tab);
 }
 
 int	main(int argc, char **argv)

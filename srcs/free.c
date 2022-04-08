@@ -1,37 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_elements_to_b.c                               :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/01 15:24:45 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/08 13:47:13 by smostefa         ###   ########.fr       */
+/*   Created: 2022/04/03 16:12:09 by smostefa          #+#    #+#             */
+/*   Updated: 2022/04/08 12:11:57 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 #include "../libft/libft.h"
 
-void	push_elements_to_b(t_info *info)
+void	free_all(t_info *info)
 {
-	t_stack	*tmp;
+	free_stack(info, 'a');
+	free_stack(info, 'o');
+	free(info->tab);
+	free(info->sort_tab);
+}
+
+void	free_stack(t_info *info, char c)
+{
 	int		i;
+	int		size;
+	t_stack	*current;
+	t_stack	*delete;
 
 	i = 0;
-	tmp = info->first_a;
-	while (i < info->size)
+	if (c == 'a')
+		current = info->first_a;
+	else if (c == 'b')
+		current = info->first_b;
+	else
+		current = info->first_o;
+	if (current)
 	{
-		if (tmp->in_place == 1)
+	size = lstsize_pushswap(info, c);
+		while (i < size - 1)
 		{
-			do_ra(info);
+			delete = current;
+			current = current->next;
+			free(delete);
 			i++;
 		}
-		else
-		{
-			do_pb(info);
-			i++;
-		}
-		tmp = info->first_a;
+		free(current);
 	}
 }

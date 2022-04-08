@@ -15,6 +15,7 @@ SRCS			=  main.c \
 			   sort_small.c \
 			   find_loop.c \
 			   push_elements_to_b.c \
+			   free.c \
 
 BONUS			= checker.c \
 			  get_next_line.c \
@@ -26,6 +27,7 @@ BONUS			= checker.c \
 			  do_swap.c \
 			  operations_tools.c \
 			  lstsize_pushswap.c \
+			  handle_instructions.c \
 
 SRCS_DIR		= srcs/
 

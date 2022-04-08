@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:26:40 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 15:28:40 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/08 12:11:45 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	*create_table(t_info *info, int size)
 
 	i = 0;
 	tab = malloc(size * sizeof(int));
+	if (!tab)
+		return (NULL);
 	tmp = info->first_a;
 	while (i < size)
 	{
@@ -92,4 +94,16 @@ int	*sort_table(int *tab, t_info *info)
 		i++;
 	}
 	return (tab);
+}
+
+void	fill_stack_a(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->size)
+	{
+		add_element_bottom(info->tab[i], info, 'a');
+		i++;
+	}
 }

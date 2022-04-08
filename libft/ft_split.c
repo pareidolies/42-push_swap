@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 11:56:39 by smostefa          #+#    #+#             */
-/*   Updated: 2021/12/08 20:12:25 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/03 18:47:48 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ char	**ft_split(char const *str, char c)
 #include <stdio.h>
 int main()
 {
-char **str = ft_split("coucouzcazva", 'z');
+char **str = ft_split("", ' ');
 int i = 0;
 
-while (i < 3)
+while (i < 1)
 {
 printf("%s\n", str[i]);
 i++;

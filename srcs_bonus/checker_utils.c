@@ -6,7 +6,7 @@
 /*   By: smostefa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:28:31 by smostefa          #+#    #+#             */
-/*   Updated: 2022/04/01 14:55:05 by smostefa         ###   ########.fr       */
+/*   Updated: 2022/04/08 12:23:59 by smostefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	initialize_info(t_info *info)
 	info->biggest = 0;
 	info->smallest = 0;
 	info->count = 0;
+	info->error = 0;
 }
 
 void	fill_stack_a(t_info *info)
@@ -57,6 +58,8 @@ int	*create_table(t_info *info, int size)
 
 	i = 0;
 	tab = malloc(size * sizeof(int));
+	if (!tab)
+		return (NULL);
 	tmp = info->first_a;
 	while (i < size)
 	{
