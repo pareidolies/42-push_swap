@@ -53,7 +53,7 @@ INCS			= includes
 
 RM		 		= rm -f
 
-CC				= cc -Wall -Wextra -Werror -fsanitize=address
+CC				= cc -Wall -Wextra -Werror
 
 all:			${NAME}
 
